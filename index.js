@@ -8,7 +8,7 @@ const { addUser, removeUser, getUser, getUsersInRoom } = require("./users");
 
 mongoose
   .connect(
-    "mongodb://mix-sumdu:sayonara2020@ds031895.mlab.com:31895/heroku_241kfctg",
+    "mongodb://mixsumdu:sayonara2020@ds023520.mlab.com:23520/heroku_m7mlzs9w",
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,

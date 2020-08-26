@@ -49,10 +49,20 @@ app.use(cors());
 app.use(router);
 
 io.on("connect", (socket) => {
-  socket.on("join", async ({ name, room }, callback) => {
+  socket.on("join", async ({ name, room, m }, callback) => {
     const { error, user } = addUser({ id: socket.id, name, room });
 
     Message = mongoose.model(`${user.room}`, messageSchema);
+
+    if (m) {
+      serverMesage = new Message({
+        name: "MixSumDU",
+        text: m,
+        messageType: "text",
+      });
+
+      await serverMesage.save();
+    }
 
     const messages = await Message.find();
 

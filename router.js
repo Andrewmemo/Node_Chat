@@ -7,7 +7,6 @@ const storage = multer.diskStorage({
     cb(null, "public");
   },
   filename: function (req, file, cb) {
-    console.log(file);
     cb(null, file.originalname);
   },
 });
@@ -16,7 +15,6 @@ const upload = multer({ storage: storage }).single("file");
 
 router.post("/upload", function (req, res) {
   upload(req, res, function (err) {
-    console.log(req.file);
     if (err instanceof multer.MulterError) {
       return res.status(500).json(err);
     } else if (err) {

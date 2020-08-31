@@ -3,17 +3,15 @@ const express = require("express");
 const socketio = require("socket.io");
 const cors = require("cors");
 const mongoose = require("mongoose");
+const config = require("config");
 
 const { addUser, removeUser, getUser, getUsersInRoom } = require("./users");
 
 mongoose
-  .connect(
-    "mongodb://mixsumdu:sayonara2020@ds023520.mlab.com:23520/heroku_m7mlzs9w",
-    {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    }
-  )
+  .connect(config.get("databaseUrl"), {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
   .then(() => console.log("Connected to MongoDB"));
 
 const messageSchema = new mongoose.Schema({
@@ -66,7 +64,7 @@ io.on("connect", (socket) => {
 
     const messages = await Message.find();
 
-    io.sockets.emit("display-chat", messages);
+    socket.emit("display-chat", messages);
 
     if (error) return callback(error);
 

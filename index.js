@@ -4,6 +4,7 @@ const socketio = require("socket.io");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const config = require("config");
+const helmet = require("helmet");
 
 const { addUser, removeUser, getUser, getUsersInRoom } = require("./users");
 
@@ -44,6 +45,7 @@ const server = http.createServer(app);
 const io = socketio(server);
 
 app.use(cors());
+app.use(helmet());
 app.use(router);
 
 io.on("connect", (socket) => {

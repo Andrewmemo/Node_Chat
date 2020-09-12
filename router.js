@@ -25,7 +25,7 @@ router.post("/upload", function (req, res) {
 });
 
 router.get("/", (req, res) => {
-  res.send("Server is up and running");
+  res.send("Server is up and running AGAA");
 });
 
 router.get("/upload/:id", (req, res) => {
